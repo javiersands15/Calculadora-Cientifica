@@ -1,4 +1,3 @@
-```javascript
 const display = document.getElementById("display");
 const buttons = document.querySelectorAll(".buttons button");
 
@@ -24,9 +23,11 @@ buttons.forEach(button => {
                 display.value = "Error";
             }
         } 
+        else if (value === "%") {
+            display.value = display.value / 100;
+        }
         else {
             display.value += value;
         }
     });
 });
-```
