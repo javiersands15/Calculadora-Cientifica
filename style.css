@@ -1,4 +1,3 @@
-```css
 * {
     box-sizing: border-box;
     margin: 0;
@@ -11,21 +10,22 @@ body {
     justify-content: center;
     align-items: center;
     font-family: Arial, sans-serif;
-    background: #1a1a1a;
+    background: #f2f2f2;
 }
 
 .calculator {
     width: 350px;
     padding: 25px;
     border-radius: 15px;
-    background: #252525;
+    background: #ffffff;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
 
 .calculator h1 {
     margin-bottom: 20px;
     text-align: center;
     font-size: 24px;
-    color: white;
+    color: #222222;
 }
 
 #display {
@@ -33,13 +33,13 @@ body {
     height: 65px;
     margin-bottom: 15px;
     padding: 10px;
-    border: none;
+    border: 2px solid #dddddd;
     border-radius: 8px;
     outline: none;
     text-align: right;
     font-size: 28px;
-    background: #111;
-    color: white;
+    background: #f8f8f8;
+    color: #222222;
 }
 
 .buttons {
@@ -54,15 +54,14 @@ body {
     border-radius: 8px;
     font-size: 20px;
     cursor: pointer;
-    background: #3a3a3a;
-    color: white;
+    background: #e6e6e6;
+    color: #222222;
 }
 
 .buttons button:hover {
-    background: #4a4a4a;
+    background: #d5d5d5;
 }
 
 .buttons button:active {
     transform: scale(0.96);
 }
-```
