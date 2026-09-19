@@ -143,3 +143,15 @@ document.addEventListener("keydown", (event) => {
         display.value = "";
     }
 });
+
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./service-worker.js")
+            .then(() => {
+                console.log("PWA activada correctamente");
+            })
+            .catch(error => {
+                console.log("Error al activar la PWA:", error);
+            });
+    });
+}
