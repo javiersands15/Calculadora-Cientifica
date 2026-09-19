@@ -41,8 +41,12 @@ buttons.forEach(button => {
                 display.value = "Error";
             }
         }
+        
+        else if (value === "π") {
+    display.value += Math.PI;
+}
 
-        else if (value === "x²") {
+else if (value === "x²") {
             try {
                 const number = Number(display.value);
 
