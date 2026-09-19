@@ -89,3 +89,57 @@ buttons.forEach(button => {
         }
     });
 });
+
+document.addEventListener("keydown", (event) => {
+    const key = event.key;
+
+    if (
+        (key >= "0" && key <= "9") ||
+        key === "." ||
+        key === "+" ||
+        key === "-" ||
+        key === "*" ||
+        key === "/" ||
+        key === "(" ||
+        key === ")"
+    ) {
+        let value = key;
+
+        if (key === "*") {
+            value = "×";
+        }
+
+        if (key === "/") {
+            value = "÷";
+        }
+
+        if (key === "-") {
+            value = "−";
+        }
+
+        display.value += value;
+    }
+
+    else if (key === "Enter" || key === "=") {
+        event.preventDefault();
+
+        try {
+            const expression = display.value
+                .replace(/×/g, "*")
+                .replace(/÷/g, "/")
+                .replace(/−/g, "-");
+
+            display.value = eval(expression);
+        } catch {
+            display.value = "Error";
+        }
+    }
+
+    else if (key === "Backspace") {
+        display.value = display.value.slice(0, -1);
+    }
+
+    else if (key === "Escape") {
+        display.value = "";
+    }
+});
