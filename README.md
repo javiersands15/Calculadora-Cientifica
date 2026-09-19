@@ -1,49 +1,43 @@
-# Calculadora Científica 🧮
+Calculadora Científica 🧮
 
 Calculadora científica desarrollada como proyecto de aprendizaje y práctica de programación.
 
-## Estado del proyecto
+Estado del proyecto
 
-**En desarrollo — Pre-Alpha**
+Alpha 0.1
 
-El proyecto se encuentra en desarrollo. Se agregarán nuevas funciones y mejoras progresivamente.
+El proyecto ha pasado la etapa Pre-Alpha y comienza la etapa Alpha. A partir de esta versión se empezarán a agregar más funciones científicas, mejoras y correcciones.
 
-## Funciones actuales
+Funciones actuales
+Suma
+Resta
+Multiplicación
+División
+Decimales
+Porcentajes
+Paréntesis
+Raíz cuadrada
+Potencia al cuadrado
+Cambio de signo
+Uso del teclado
+PWA instalable
+Tecnologías
+HTML
+CSS
+JavaScript
+PWA
+Objetivo
 
-- Suma
-- Resta
-- Multiplicación
-- División
-- Operaciones con números decimales
+Crear una calculadora científica funcional, completa y fácil de usar mientras se aprende y practica programación.
 
-## Próximamente
+Versiones
 
-- Potencias
-- Raíces cuadradas
-- Porcentajes
-- Funciones trigonométricas
-- Historial de operaciones
-- Mejoras en la interfaz
-- Más funciones científicas
+Las versiones importantes del proyecto se publicarán mediante GitHub Releases.
 
-## Tecnologías
+Versión actual:
 
-- HTML
-- CSS
-- JavaScript
+v0.1.0-alpha — Alpha 0.1
 
-## Objetivo
+Autor
 
-Crear una calculadora científica funcional mientras aprendo y mejoro mis conocimientos de programación.
-
-## Autor
-
-**javiersands15**
-
-## Proyecto 🚧
-
-Este proyecto se encuentra en desarrollo y recibirá actualizaciones progresivamente.
-
----
-
-Proyecto creado con fines de aprendizaje y práctica.
+javiersands15
