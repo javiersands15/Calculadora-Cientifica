@@ -1,12 +1,15 @@
 const display = document.getElementById("display");
 const buttons = document.querySelectorAll(".buttons button");
 
+let powerBase = null;
+
 buttons.forEach(button => {
     button.addEventListener("click", () => {
         const value = button.textContent;
 
         if (value === "AC") {
             display.value = "";
+            powerBase = null;
         }
 
         else if (value === "DEL") {
@@ -15,6 +18,19 @@ buttons.forEach(button => {
 
         else if (value === "=") {
             try {
+                if (powerBase !== null) {
+                    const exponent = Number(display.value);
+
+                    if (display.value === "" || isNaN(exponent)) {
+                        display.value = "Error";
+                    } else {
+                        display.value = powerBase ** exponent;
+                    }
+
+                    powerBase = null;
+                    return;
+                }
+
                 const expression = display.value
                     .replace(/×/g, "*")
                     .replace(/÷/g, "/")
@@ -30,9 +46,7 @@ buttons.forEach(button => {
             try {
                 const number = Number(display.value);
 
-                if (display.value === "" || isNaN(number)) {
-                    display.value = "Error";
-                } else if (number < 0) {
+                if (display.value === "" || isNaN(number) || number < 0) {
                     display.value = "Error";
                 } else {
                     display.value = Math.sqrt(number);
@@ -41,39 +55,45 @@ buttons.forEach(button => {
                 display.value = "Error";
             }
         }
-        
+
         else if (value === "π") {
-    display.value += Math.PI;
-}
-            
-else if (value === "sin") {
-    try {
-        const number = Number(display.value);
-        display.value = Number(Math.sin(number * Math.PI / 180).toFixed(10));
-    } catch {
-        display.value = "Error";
-    }
-}
+            display.value += Math.PI;
+        }
 
-else if (value === "cos") {
-    try {
-        const number = Number(display.value);
-        display.value = Number(Math.cos(number * Math.PI / 180).toFixed(10));
-    } catch {
-        display.value = "Error";
-    }
-}
+        else if (value === "sin") {
+            try {
+                const number = Number(display.value);
+                display.value = Number(
+                    Math.sin(number * Math.PI / 180).toFixed(10)
+                );
+            } catch {
+                display.value = "Error";
+            }
+        }
 
-else if (value === "tan") {
-    try {
-        const number = Number(display.value);
-        display.value = Number(Math.tan(number * Math.PI / 180).toFixed(10));
-    } catch {
-        display.value = "Error";
-    }
-}
-    
-else if (value === "x²") {
+        else if (value === "cos") {
+            try {
+                const number = Number(display.value);
+                display.value = Number(
+                    Math.cos(number * Math.PI / 180).toFixed(10)
+                );
+            } catch {
+                display.value = "Error";
+            }
+        }
+
+        else if (value === "tan") {
+            try {
+                const number = Number(display.value);
+                display.value = Number(
+                    Math.tan(number * Math.PI / 180).toFixed(10)
+                );
+            } catch {
+                display.value = "Error";
+            }
+        }
+
+        else if (value === "x²") {
             try {
                 const number = Number(display.value);
 
@@ -84,6 +104,13 @@ else if (value === "x²") {
                 }
             } catch {
                 display.value = "Error";
+            }
+        }
+
+        else if (value === "xʸ") {
+            if (display.value !== "") {
+                powerBase = Number(display.value);
+                display.value = "";
             }
         }
 
@@ -121,6 +148,7 @@ else if (value === "x²") {
     });
 });
 
+
 document.addEventListener("keydown", (event) => {
     const key = event.key;
 
@@ -155,6 +183,19 @@ document.addEventListener("keydown", (event) => {
         event.preventDefault();
 
         try {
+            if (powerBase !== null) {
+                const exponent = Number(display.value);
+
+                if (display.value === "" || isNaN(exponent)) {
+                    display.value = "Error";
+                } else {
+                    display.value = powerBase ** exponent;
+                }
+
+                powerBase = null;
+                return;
+            }
+
             const expression = display.value
                 .replace(/×/g, "*")
                 .replace(/÷/g, "/")
@@ -172,8 +213,10 @@ document.addEventListener("keydown", (event) => {
 
     else if (key === "Escape") {
         display.value = "";
+        powerBase = null;
     }
 });
+
 
 if ("serviceWorker" in navigator) {
     window.addEventListener("load", () => {
