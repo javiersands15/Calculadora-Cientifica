@@ -49,7 +49,7 @@ buttons.forEach(button => {
 else if (value === "sin") {
     try {
         const number = Number(display.value);
-        display.value = Math.sin(number * Math.PI / 180);
+        display.value = Number(Math.sin(number * Math.PI / 180).toFixed(10));
     } catch {
         display.value = "Error";
     }
@@ -58,7 +58,7 @@ else if (value === "sin") {
 else if (value === "cos") {
     try {
         const number = Number(display.value);
-        display.value = Math.cos(number * Math.PI / 180);
+        display.value = Number(Math.cos(number * Math.PI / 180).toFixed(10));
     } catch {
         display.value = "Error";
     }
@@ -67,7 +67,7 @@ else if (value === "cos") {
 else if (value === "tan") {
     try {
         const number = Number(display.value);
-        display.value = Math.tan(number * Math.PI / 180);
+        display.value = Number(Math.tan(number * Math.PI / 180).toFixed(10));
     } catch {
         display.value = "Error";
     }
