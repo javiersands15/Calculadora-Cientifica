@@ -9,24 +9,37 @@ Calculadora científica desarrollada como proyecto de aprendizaje y práctica de
 El proyecto ha pasado la etapa Pre-Alpha y comienza la etapa Alpha. A partir de esta versión se empezarán a agregar más funciones científicas, mejoras y correcciones.
 
 ## Funciones actuales
-Suma
-Resta
-Multiplicación
-División
-Decimales
-Porcentajes
-Paréntesis
-Raíz cuadrada
-Potencia al cuadrado
-Cambio de signo
-Uso del teclado
-PWA instalable
+
+###Suma
+
+###Resta
+
+###Multiplicación
+
+###División
+
+###Decimales
+
+###Porcentajes
+
+###Paréntesis
+
+###Raíz cuadrada
+
+###Potencia al cuadrado
+
+###Cambio de signo
+
+###Uso del teclado
+
+###PWA instalable
 
 ## Tecnologías
-HTML
-CSS
-JavaScript
-PWA
+
+###HTML
+###CSS
+###JavaScript
+###PWA
 
 ## Objetivo
 
