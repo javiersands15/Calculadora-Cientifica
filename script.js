@@ -17,43 +17,19 @@ buttons.forEach(button => {
         }
 
         else if (value === "=") {
-            try {
-                if (powerBase !== null) {
-                    const exponent = Number(display.value);
-
-                    if (display.value === "" || isNaN(exponent)) {
-                        display.value = "Error";
-                    } else {
-                        display.value = powerBase ** exponent;
-                    }
-
-                    powerBase = null;
-                    return;
-                }
-
-                const expression = display.value
-                    .replace(/×/g, "*")
-                    .replace(/÷/g, "/")
-                    .replace(/−/g, "-");
-
-                display.value = eval(expression);
-            } catch {
-                display.value = "Error";
-            }
+            calculateResult();
         }
 
         else if (value === "√") {
-            try {
-                const number = Number(display.value);
+            calculateSquareRoot();
+        }
 
-                if (display.value === "" || isNaN(number) || number < 0) {
-                    display.value = "Error";
-                } else {
-                    display.value = Math.sqrt(number);
-                }
-            } catch {
-                display.value = "Error";
-            }
+        else if (value === "x²") {
+            calculateSquare();
+        }
+
+        else if (value === "xʸ") {
+            startPower();
         }
 
         else if (value === "π") {
@@ -61,85 +37,31 @@ buttons.forEach(button => {
         }
 
         else if (value === "sin") {
-            try {
-                const number = Number(display.value);
-                display.value = Number(
-                    Math.sin(number * Math.PI / 180).toFixed(10)
-                );
-            } catch {
-                display.value = "Error";
-            }
+            calculateSin();
         }
 
         else if (value === "cos") {
-            try {
-                const number = Number(display.value);
-                display.value = Number(
-                    Math.cos(number * Math.PI / 180).toFixed(10)
-                );
-            } catch {
-                display.value = "Error";
-            }
+            calculateCos();
         }
 
         else if (value === "tan") {
-            try {
-                const number = Number(display.value);
-                display.value = Number(
-                    Math.tan(number * Math.PI / 180).toFixed(10)
-                );
-            } catch {
-                display.value = "Error";
-            }
+            calculateTan();
         }
 
-        else if (value === "x²") {
-            try {
-                const number = Number(display.value);
-
-                if (display.value === "" || isNaN(number)) {
-                    display.value = "Error";
-                } else {
-                    display.value = number ** 2;
-                }
-            } catch {
-                display.value = "Error";
-            }
+        else if (value === "log") {
+            calculateLog();
         }
 
-        else if (value === "xʸ") {
-            if (display.value !== "") {
-                powerBase = Number(display.value);
-                display.value = "";
-            }
+        else if (value === "ln") {
+            calculateLn();
         }
 
         else if (value === "±") {
-            try {
-                const number = Number(display.value);
-
-                if (display.value === "" || isNaN(number)) {
-                    display.value = "Error";
-                } else {
-                    display.value = number * -1;
-                }
-            } catch {
-                display.value = "Error";
-            }
+            changeSign();
         }
 
         else if (value === "%") {
-            try {
-                const number = Number(display.value);
-
-                if (display.value === "" || isNaN(number)) {
-                    display.value = "Error";
-                } else {
-                    display.value = number / 100;
-                }
-            } catch {
-                display.value = "Error";
-            }
+            calculatePercentage();
         }
 
         else {
@@ -147,6 +69,196 @@ buttons.forEach(button => {
         }
     });
 });
+
+
+function calculateResult() {
+    try {
+        if (powerBase !== null) {
+            const exponent = Number(display.value);
+
+            if (display.value === "" || isNaN(exponent)) {
+                display.value = "Error";
+            } else {
+                display.value = powerBase ** exponent;
+            }
+
+            powerBase = null;
+            return;
+        }
+
+        const expression = display.value
+            .replace(/×/g, "*")
+            .replace(/÷/g, "/")
+            .replace(/−/g, "-");
+
+        display.value = eval(expression);
+
+    } catch {
+        display.value = "Error";
+    }
+}
+
+
+function calculateSquareRoot() {
+    try {
+        const number = Number(display.value);
+
+        if (display.value === "" || isNaN(number) || number < 0) {
+            display.value = "Error";
+        } else {
+            display.value = Math.sqrt(number);
+        }
+
+    } catch {
+        display.value = "Error";
+    }
+}
+
+
+function calculateSquare() {
+    try {
+        const number = Number(display.value);
+
+        if (display.value === "" || isNaN(number)) {
+            display.value = "Error";
+        } else {
+            display.value = number ** 2;
+        }
+
+    } catch {
+        display.value = "Error";
+    }
+}
+
+
+function startPower() {
+    if (display.value !== "") {
+        powerBase = Number(display.value);
+        display.value = "";
+    }
+}
+
+
+function calculateSin() {
+    try {
+        const number = Number(display.value);
+
+        if (display.value === "" || isNaN(number)) {
+            display.value = "Error";
+        } else {
+            display.value = Number(
+                Math.sin(number * Math.PI / 180).toFixed(10)
+            );
+        }
+
+    } catch {
+        display.value = "Error";
+    }
+}
+
+
+function calculateCos() {
+    try {
+        const number = Number(display.value);
+
+        if (display.value === "" || isNaN(number)) {
+            display.value = "Error";
+        } else {
+            display.value = Number(
+                Math.cos(number * Math.PI / 180).toFixed(10)
+            );
+        }
+
+    } catch {
+        display.value = "Error";
+    }
+}
+
+
+function calculateTan() {
+    try {
+        const number = Number(display.value);
+
+        if (display.value === "" || isNaN(number)) {
+            display.value = "Error";
+        } else {
+            display.value = Number(
+                Math.tan(number * Math.PI / 180).toFixed(10)
+            );
+        }
+
+    } catch {
+        display.value = "Error";
+    }
+}
+
+
+function calculateLog() {
+    try {
+        const number = Number(display.value);
+
+        if (display.value === "" || isNaN(number) || number <= 0) {
+            display.value = "Error";
+        } else {
+            display.value = Number(
+                Math.log10(number).toFixed(10)
+            );
+        }
+
+    } catch {
+        display.value = "Error";
+    }
+}
+
+
+function calculateLn() {
+    try {
+        const number = Number(display.value);
+
+        if (display.value === "" || isNaN(number) || number <= 0) {
+            display.value = "Error";
+        } else {
+            display.value = Number(
+                Math.log(number).toFixed(10)
+            );
+        }
+
+    } catch {
+        display.value = "Error";
+    }
+}
+
+
+function changeSign() {
+    try {
+        const number = Number(display.value);
+
+        if (display.value === "" || isNaN(number)) {
+            display.value = "Error";
+        } else {
+            display.value = number * -1;
+        }
+
+    } catch {
+        display.value = "Error";
+    }
+}
+
+
+function calculatePercentage() {
+    try {
+        const number = Number(display.value);
+
+        if (display.value === "" || isNaN(number)) {
+            display.value = "Error";
+        } else {
+            display.value = number / 100;
+        }
+
+    } catch {
+        display.value = "Error";
+    }
+}
 
 
 document.addEventListener("keydown", (event) => {
@@ -181,30 +293,7 @@ document.addEventListener("keydown", (event) => {
 
     else if (key === "Enter" || key === "=") {
         event.preventDefault();
-
-        try {
-            if (powerBase !== null) {
-                const exponent = Number(display.value);
-
-                if (display.value === "" || isNaN(exponent)) {
-                    display.value = "Error";
-                } else {
-                    display.value = powerBase ** exponent;
-                }
-
-                powerBase = null;
-                return;
-            }
-
-            const expression = display.value
-                .replace(/×/g, "*")
-                .replace(/÷/g, "/")
-                .replace(/−/g, "-");
-
-            display.value = eval(expression);
-        } catch {
-            display.value = "Error";
-        }
+        calculateResult();
     }
 
     else if (key === "Backspace") {
