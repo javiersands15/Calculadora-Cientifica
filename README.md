@@ -10,36 +10,39 @@ El proyecto ha pasado la etapa Pre-Alpha y comienza la etapa Alpha. A partir de 
 
 ## Funciones actuales
 
-###Suma
+### Suma
 
-###Resta
+### Resta
 
-###Multiplicación
+### Multiplicación
 
-###División
+### División
 
-###Decimales
+### Decimales
 
-###Porcentajes
+### Porcentajes
 
-###Paréntesis
+### Paréntesis
 
-###Raíz cuadrada
+### Raíz cuadrada
 
-###Potencia al cuadrado
+### Potencia al cuadrado
 
-###Cambio de signo
+### Cambio de signo
 
-###Uso del teclado
+### Uso del teclado
 
-###PWA instalable
+### PWA instalable
 
 ## Tecnologías
 
-###HTML
-###CSS
-###JavaScript
-###PWA
+### HTML
+
+### CSS
+
+### JavaScript
+
+### PWA
 
 ## Objetivo
 
