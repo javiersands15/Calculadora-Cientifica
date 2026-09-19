@@ -1,0 +1,10 @@
+{
+    "name": "Calculadora Científica",
+    "short_name": "Calculadora",
+    "description": "Calculadora científica desarrollada como proyecto de aprendizaje.",
+    "start_url": "./",
+    "display": "standalone",
+    "background_color": "#f3f4f6",
+    "theme_color": "#ffffff",
+    "orientation": "portrait-primary"
+}
