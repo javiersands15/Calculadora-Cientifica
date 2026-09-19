@@ -45,7 +45,34 @@ buttons.forEach(button => {
         else if (value === "π") {
     display.value += Math.PI;
 }
+            
+else if (value === "sin") {
+    try {
+        const number = Number(display.value);
+        display.value = Math.sin(number * Math.PI / 180);
+    } catch {
+        display.value = "Error";
+    }
+}
 
+else if (value === "cos") {
+    try {
+        const number = Number(display.value);
+        display.value = Math.cos(number * Math.PI / 180);
+    } catch {
+        display.value = "Error";
+    }
+}
+
+else if (value === "tan") {
+    try {
+        const number = Number(display.value);
+        display.value = Math.tan(number * Math.PI / 180);
+    } catch {
+        display.value = "Error";
+    }
+}
+    
 else if (value === "x²") {
             try {
                 const number = Number(display.value);
