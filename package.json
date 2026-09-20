@@ -1,13 +1,13 @@
 {
   "name": "calculadora-cientifica",
   "version": "1.0.0",
-  "description": "Calculadora científica para web, Windows y Android.",
+  "description": "Calculadora científica para Windows.",
   "main": "electron-main.cjs",
   "author": "javiersands15",
   "license": "MIT",
   "scripts": {
     "start": "electron .",
-    "desktop:build": "electron-builder --win",
+    "desktop:build": "electron-builder --win"
   },
   "devDependencies": {
     "electron": "^38.1.0",
