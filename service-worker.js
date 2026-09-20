@@ -1,4 +1,4 @@
-const CACHE_NAME = "calculadora-cientifica-v0.3";
+const CACHE_NAME = "calculadora-cientifica-v0.4";
 
 const FILES_TO_CACHE = [
     "./",
@@ -36,6 +36,21 @@ self.addEventListener("fetch", event => {
         return;
     }
 
+    // Forzar la comprobación de cambios en la app principal
+    if (event.request.mode === "navigate") {
+        event.respondWith(
+            fetch(event.request)
+                .then(response => {
+                    const clone = response.clone();
+                    caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
+                    return response;
+                })
+                .catch(() => caches.match("./index.html"))
+        );
+        return;
+    }
+
+    // Para estáticos, preferir caché si está actualizado
     event.respondWith(
         caches.match(event.request).then(response => {
             return response || fetch(event.request).then(networkResponse => {
