@@ -1,0 +1,55 @@
+{
+  "name": "calculadora-cientifica",
+  "version": "1.0.0",
+  "description": "Calculadora científica para web, Windows y Android.",
+  "main": "electron-main.cjs",
+  "author": "javiersands15",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "desktop:build": "electron-builder --win",
+    "android:add": "cap add android",
+    "android:sync": "cap sync android",
+    "android:open": "cap open android",
+    "android:build": "cap build android"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^7.4.0",
+    "electron": "^38.1.0",
+    "electron-builder": "^26.0.12"
+  },
+  "dependencies": {
+    "@capacitor/android": "^7.4.0",
+    "@capacitor/core": "^7.4.0"
+  },
+  "build": {
+    "appId": "com.javiersands15.calculadoracientifica",
+    "productName": "Calculadora Científica",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "index.html",
+      "script.js",
+      "style.css",
+      "manifest.json",
+      "service-worker.js",
+      "icon.png",
+      "electron-main.cjs",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        "nsis",
+        "portable"
+      ],
+      "icon": "icon.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  }
+}
