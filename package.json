@@ -8,14 +8,10 @@
   "scripts": {
     "start": "electron .",
     "desktop:build": "electron-builder --win",
-    
   },
   "devDependencies": {
     "electron": "^38.1.0",
     "electron-builder": "^26.0.12"
-  },
-
-  
   },
   "build": {
     "appId": "com.javiersands15.calculadoracientifica",
