@@ -1,0 +1,37 @@
+name: Build Windows App
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: read
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+
+    steps:
+      - name: Descargar código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Instalar dependencias
+        run: npm install
+
+      - name: Crear aplicación de Windows
+        run: npm run desktop:build
+
+      - name: Guardar instaladores
+        uses: actions/upload-artifact@v4
+        with:
+          name: Calculadora-Cientifica-Windows
+          path: release/*
+          if-no-files-found: error
