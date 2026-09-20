@@ -8,19 +8,14 @@
   "scripts": {
     "start": "electron .",
     "desktop:build": "electron-builder --win",
-    "android:add": "cap add android",
-    "android:sync": "cap sync android",
-    "android:open": "cap open android",
-    "android:build": "cap build android"
+    
   },
   "devDependencies": {
-    "@capacitor/cli": "^7.4.0",
     "electron": "^38.1.0",
     "electron-builder": "^26.0.12"
   },
-  "dependencies": {
-    "@capacitor/android": "^7.4.0",
-    "@capacitor/core": "^7.4.0"
+
+  
   },
   "build": {
     "appId": "com.javiersands15.calculadoracientifica",
