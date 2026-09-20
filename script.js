@@ -3,6 +3,55 @@ const buttons = document.querySelectorAll(".buttons button");
 
 let powerBase = null;
 
+function clearDisplayIfError() {
+    if (display.value === "Error") {
+        display.value = "";
+        powerBase = null;
+        return true;
+    }
+    return false;
+}
+
+function appendValue(value) {
+    clearDisplayIfError();
+    display.value += value;
+}
+
+function toSafeExpression(inputValue) {
+    const expression = inputValue.trim();
+
+    if (expression === "") {
+        throw new Error("Expresión vacía");
+    }
+
+    const normalized = expression
+        .replace(/π/g, String(Math.PI))
+        .replace(/×/g, "*")
+        .replace(/÷/g, "/")
+        .replace(/−/g, "-")
+        .replace(/–/g, "-")
+        .replace(/—/g, "-")
+        .replace(/%/g, "/100");
+
+    if (!/^[0-9+\-*/().\s]+$/.test(normalized)) {
+        throw new Error("Caracter no permitido");
+    }
+
+    return normalized;
+}
+
+function evaluateExpression(expression) {
+    const safeExpression = toSafeExpression(expression);
+    const evaluator = new Function(`"use strict"; return (${safeExpression});`);
+    const result = evaluator();
+
+    if (!Number.isFinite(result)) {
+        throw new Error("Resultado no finito");
+    }
+
+    return result;
+}
+
 buttons.forEach(button => {
     button.addEventListener("click", () => {
         const value = button.textContent;
@@ -13,7 +62,12 @@ buttons.forEach(button => {
         }
 
         else if (value === "DEL") {
-            display.value = display.value.slice(0, -1);
+            if (display.value === "Error") {
+                display.value = "";
+                powerBase = null;
+            } else {
+                display.value = display.value.slice(0, -1);
+            }
         }
 
         else if (value === "=") {
@@ -33,7 +87,7 @@ buttons.forEach(button => {
         }
 
         else if (value === "π") {
-            display.value += Math.PI;
+            appendValue("π");
         }
 
         else if (value === "sin") {
@@ -65,64 +119,64 @@ buttons.forEach(button => {
         }
 
         else {
-            display.value += value;
+            appendValue(value);
         }
     });
 });
-
 
 function calculateResult() {
     try {
         if (powerBase !== null) {
             const exponent = Number(display.value);
 
-            if (display.value === "" || isNaN(exponent)) {
+            if (display.value.trim() === "" || !Number.isFinite(exponent)) {
                 display.value = "Error";
             } else {
-                display.value = powerBase ** exponent;
+                const result = powerBase ** exponent;
+                display.value = Number.isFinite(result) ? result : "Error";
             }
 
             powerBase = null;
             return;
         }
 
-        const expression = display.value
-            .replace(/×/g, "*")
-            .replace(/÷/g, "/")
-            .replace(/−/g, "-");
+        if (display.value.trim() === "") {
+            display.value = "Error";
+            return;
+        }
 
-        display.value = eval(expression);
+        const result = evaluateExpression(display.value);
+        display.value = Number(result.toFixed(10));
 
     } catch {
         display.value = "Error";
     }
 }
-
 
 function calculateSquareRoot() {
     try {
         const number = Number(display.value);
 
-        if (display.value === "" || isNaN(number) || number < 0) {
+        if (display.value.trim() === "" || !Number.isFinite(number) || number < 0) {
             display.value = "Error";
         } else {
-            display.value = Math.sqrt(number);
+            display.value = Number(Math.sqrt(number).toFixed(10));
         }
 
     } catch {
         display.value = "Error";
     }
 }
-
 
 function calculateSquare() {
     try {
         const number = Number(display.value);
 
-        if (display.value === "" || isNaN(number)) {
+        if (display.value.trim() === "" || !Number.isFinite(number)) {
             display.value = "Error";
         } else {
-            display.value = number ** 2;
+            const result = number ** 2;
+            display.value = Number.isFinite(result) ? Number(result.toFixed(10)) : "Error";
         }
 
     } catch {
@@ -130,97 +184,85 @@ function calculateSquare() {
     }
 }
 
-
 function startPower() {
-    if (display.value !== "") {
-        powerBase = Number(display.value);
+    const number = Number(display.value);
+
+    if (display.value.trim() !== "" && Number.isFinite(number)) {
+        powerBase = number;
         display.value = "";
+    } else {
+        display.value = "Error";
     }
 }
-
 
 function calculateSin() {
     try {
         const number = Number(display.value);
 
-        if (display.value === "" || isNaN(number)) {
+        if (display.value.trim() === "" || !Number.isFinite(number)) {
             display.value = "Error";
         } else {
-            display.value = Number(
-                Math.sin(number * Math.PI / 180).toFixed(10)
-            );
+            display.value = Number((Math.sin(number * Math.PI / 180)).toFixed(10));
         }
 
     } catch {
         display.value = "Error";
     }
 }
-
 
 function calculateCos() {
     try {
         const number = Number(display.value);
 
-        if (display.value === "" || isNaN(number)) {
+        if (display.value.trim() === "" || !Number.isFinite(number)) {
             display.value = "Error";
         } else {
-            display.value = Number(
-                Math.cos(number * Math.PI / 180).toFixed(10)
-            );
+            display.value = Number((Math.cos(number * Math.PI / 180)).toFixed(10));
         }
 
     } catch {
         display.value = "Error";
     }
 }
-
 
 function calculateTan() {
     try {
         const number = Number(display.value);
 
-        if (display.value === "" || isNaN(number)) {
+        if (display.value.trim() === "" || !Number.isFinite(number)) {
             display.value = "Error";
         } else {
-            display.value = Number(
-                Math.tan(number * Math.PI / 180).toFixed(10)
-            );
+            display.value = Number((Math.tan(number * Math.PI / 180)).toFixed(10));
         }
 
     } catch {
         display.value = "Error";
     }
 }
-
 
 function calculateLog() {
     try {
         const number = Number(display.value);
 
-        if (display.value === "" || isNaN(number) || number <= 0) {
+        if (display.value.trim() === "" || !Number.isFinite(number) || number <= 0) {
             display.value = "Error";
         } else {
-            display.value = Number(
-                Math.log10(number).toFixed(10)
-            );
+            display.value = Number(Math.log10(number).toFixed(10));
         }
 
     } catch {
         display.value = "Error";
     }
 }
-
 
 function calculateLn() {
     try {
         const number = Number(display.value);
 
-        if (display.value === "" || isNaN(number) || number <= 0) {
+        if (display.value.trim() === "" || !Number.isFinite(number) || number <= 0) {
             display.value = "Error";
         } else {
-            display.value = Number(
-                Math.log(number).toFixed(10)
-            );
+            display.value = Number(Math.log(number).toFixed(10));
         }
 
     } catch {
@@ -228,12 +270,11 @@ function calculateLn() {
     }
 }
 
-
 function changeSign() {
     try {
         const number = Number(display.value);
 
-        if (display.value === "" || isNaN(number)) {
+        if (display.value.trim() === "" || !Number.isFinite(number)) {
             display.value = "Error";
         } else {
             display.value = number * -1;
@@ -244,15 +285,14 @@ function changeSign() {
     }
 }
 
-
 function calculatePercentage() {
     try {
         const number = Number(display.value);
 
-        if (display.value === "" || isNaN(number)) {
+        if (display.value.trim() === "" || !Number.isFinite(number)) {
             display.value = "Error";
         } else {
-            display.value = number / 100;
+            display.value = Number((number / 100).toFixed(10));
         }
 
     } catch {
@@ -260,35 +300,17 @@ function calculatePercentage() {
     }
 }
 
-
 document.addEventListener("keydown", (event) => {
     const key = event.key;
 
-    if (
-        (key >= "0" && key <= "9") ||
-        key === "." ||
-        key === "+" ||
-        key === "-" ||
-        key === "*" ||
-        key === "/" ||
-        key === "(" ||
-        key === ")"
-    ) {
+    if ((key >= "0" && key <= "9") || key === "." || key === "+" || key === "-" || key === "*" || key === "/" || key === "(" || key === ")") {
         let value = key;
 
-        if (key === "*") {
-            value = "×";
-        }
+        if (key === "*") value = "×";
+        if (key === "/") value = "÷";
+        if (key === "-") value = "−";
 
-        if (key === "/") {
-            value = "÷";
-        }
-
-        if (key === "-") {
-            value = "−";
-        }
-
-        display.value += value;
+        appendValue(value);
     }
 
     else if (key === "Enter" || key === "=") {
@@ -297,7 +319,12 @@ document.addEventListener("keydown", (event) => {
     }
 
     else if (key === "Backspace") {
-        display.value = display.value.slice(0, -1);
+        if (display.value === "Error") {
+            display.value = "";
+            powerBase = null;
+        } else {
+            display.value = display.value.slice(0, -1);
+        }
     }
 
     else if (key === "Escape") {
@@ -305,7 +332,6 @@ document.addEventListener("keydown", (event) => {
         powerBase = null;
     }
 });
-
 
 if ("serviceWorker" in navigator) {
     window.addEventListener("load", () => {
@@ -318,3 +344,45 @@ if ("serviceWorker" in navigator) {
             });
     });
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
